@@ -150,16 +150,17 @@
 
 
     var index = 0, index2 = 0, userInfo;
-    var sqls = "insert into user_info values"
     var output = fs.createWriteStream(outputFile);
     var start = new Date().getTime();
+    var sqls ="";
     while(index < max) {
+        sqls += "insert into user_info values"
         index ++;
         index2 ++;
         userInfo = getUserInfo();
-        sqls += `(null, '${userInfo.username}', '${userInfo.password}', '${userInfo.idcard}', '${userInfo.email}', '${userInfo.name}', '${userInfo.addr}', '${userInfo.sex}', '${userInfo.phone}')`
+        sqls += `(null, '${userInfo.username}', '${userInfo.password}', '${userInfo.idcard}', '${userInfo.email}', '${userInfo.name}', '${userInfo.addr}', '${userInfo.sex}', '${userInfo.phone}');`
         if(index < max ) {
-            sqls += ',\r\n';
+            sqls += '\r\n';
         }
         if(index2 === 1000) {
             output.write(sqls);
